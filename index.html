@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f3ed">
+<title>یک سؤال برای آیدا | حمید و آیدا</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --gold: #b99a62;
+  --dark: #25221f;
+  --cream: #f8f5ef;
+  --white: #fffdf9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button { cursor: pointer; }
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+}
+
+.panel {
+  width: min(100%, 660px);
+  padding: clamp(25px, 6vw, 54px);
+  background: rgba(255,253,249,.96);
+  border: 1px solid #e9dfce;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 24px 80px #66523812;
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.small-line {
+  width: 54px;
+  height: 1px;
+  background: var(--gold);
+  margin: 24px auto;
+}
+
+h1, h2, p { margin-top: 0; }
+
+h1 {
+  font-size: clamp(28px, 6vw, 48px);
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+h2 {
+  font-size: clamp(23px, 5vw, 32px);
+  line-height: 1.7;
+}
+
+p {
+  line-height: 2;
+  color: #777067;
+  font-size: 14px;
+}
+
+.name {
+  color: var(--gold);
+}
+
+.actions {
+  position: relative;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.btn {
+  border: 0;
+  border-radius: 3px;
+  padding: 14px 32px;
+  transition: transform .25s, background .25s, box-shadow .25s;
+  font-weight: 600;
+}
+
+.btn:active { transform: scale(.96); }
+
+.yes {
+  color: white;
+  background: #29251f;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 7px 20px #29251f24;
+}
+
+.yes:hover {
+  background: var(--gold);
+  box-shadow: 0 8px 28px #b99a6244;
+}
+
+.no {
+  color: #554d43;
+  background: #eee8df;
+  position: relative;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+.hint {
+  font-size: 11px;
+  color: #aaa093;
+  margin-top: 20px;
+}
+
+/* صفحه دوم */
+
+#celebration {
+  display: none;
+  min-height: 100vh;
+  padding: 30px 16px 60px;
+  background:
+    radial-gradient(ellipse at 50% 0%, #fff 0%, transparent 60%),
+    linear-gradient(145deg,#f8f2e8,#fffdf9 55%,#eee3cf);
+  animation: reveal .9s ease both;
+}
+
+@keyframes reveal {
+  from { opacity: 0; filter: blur(12px); transform: scale(.96); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+.luxury {
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 45px 12px 35px;
+}
+
+.hero .crown {
+  font-size: 35px;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  color: #a6874e;
+  margin-bottom: 8px;
+}
+
+.hero .subtitle {
+  color: #8b7860;
+}
+
+.form-card {
+  background: rgba(255,255,255,.8);
+  border: 1px solid #e5d6bb;
+  padding: clamp(20px, 5vw, 36px);
+  margin: 20px 0;
+  box-shadow: 0 18px 55px #6d4c1b0b;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.section-title span {
+  color: var(--gold);
+  font-size: 23px;
+}
+
+.section-title h2 {
+  font-size: 21px;
+  margin: 0;
+}
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 19px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: right;
+}
+
+.field.full { grid-column: 1 / -1; }
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #625646;
+}
+
+input, select, textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #e5ded2;
+  background: #fffefa;
+  color: #332d25;
+  padding: 13px;
+  border-radius: 3px;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px #b99a6214;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.color-option {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 1px #ddd;
+  position: relative;
+}
+
+.color-option.selected {
+  box-shadow: 0 0 0 2px var(--gold);
+}
+
+.color-option.selected::after {
+  content: "✓";
+  color: white;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-shadow: 0 1px 3px #000;
+  font-size: 17px;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 12px;
+  background: #29251f;
+  color: white;
+  padding: 17px;
+}
+
+.submit:hover { background: #9d7e48; }
+
+#result {
+  display: none;
+  margin-top: 24px;
+  padding: 25px;
+  background: #fffdf8;
+  border: 1px solid #d8c39d;
+  text-align: center;
+}
+
+#result h2 { color: #9c7b43; }
+
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.secondary {
+  border: 1px solid #d7c6a5;
+  background: white;
+  color: #725a32;
+  padding: 12px 18px;
+  border-radius: 3px;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 0;
+  font-size: 11px;
+  color: #a59a89;
+}
+
+/* افکت لحظه انتخاب */
+
+#transition {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 40px 20px #d9b66c;
+  animation: burst .9s ease-out forwards;
+}
+
+@keyframes burst {
+  to {
+    transform: scale(180);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  z-index: 101;
+  top: -20px;
+  width: 8px;
+  height: 15px;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(850deg);
+    opacity: .15;
+  }
+}
+
+@media (max-width: 520px) {
+  .fields { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .panel { padding: 28px 20px; }
+  .btn { padding: 13px 25px; }
+  .form-card { padding: 20px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="transition"></div>
+
+<!-- مرحله اول -->
+<main class="page" id="questionPage">
+  <section class="panel">
+    <div class="eyebrow">A SPECIAL QUESTION</div>
+
+    <h1>
+      آیدا، یه سؤال مهم ازت دارم...
+    </h1>
+
+    <div class="small-line"></div>
+
+    <p>
+      اگه یه روزی قرار باشه یه داستان قشنگ شروع بشه،
+      دوست داری اسم تو و حمید توی اولین صفحه‌ش باشه؟
+    </p>
+
+    <h2>
+      <span class="name">آیدا</span>، با <span class="name">حمید</span>
+      ازدواج می‌کنی؟ 💍
+    </h2>
+
+    <div class="actions" id="actions">
+      <button class="btn yes" id="yesBtn" onclick="sayYes()">
+        آره، با کمال میل ♡
+      </button>
+
+      <button class="btn no" id="noBtn" onclick="sayNo()">
+        نه!
+      </button>
+    </div>
+
+    <div class="hint" id="hint">
+      یه انتخاب کوچیک، با یه داستان بزرگ...
+    </div>
+  </section>
+</main>
+
+<!-- صفحه لوکس -->
+<main id="celebration">
+
+  <div class="luxury">
+    <header class="hero">
+      <div class="crown">✦ ♡ ✦</div>
+      <div class="eyebrow">A NEW CHAPTER BEGINS</div>
+
+      <h1>مبارکه آیدا جان!</h1>
+
+      <p class="subtitle">
+        تو در این داستان عاشقانه، پیشنهاد حمید رو پذیرفتی!
+      </p>
+
+      <div class="small-line"></div>
+
+      <h2>
+        آیدا و حمید
+      </h2>
+
+      <p>
+        حالا وقتشه مراسم رؤیایی‌مون رو با سلیقه‌ی خودت طراحی کنیم.
+        اینجا همه‌چیز از انتخاب‌های تو شروع می‌شه.
+      </p>
+    </header>
+
+    <form id="weddingForm">
+
+      <section class="form-card">
+        <div class="section-title">
+          <span>01</span>
+          <h2>زمان و مکان مراسم</h2>
+        </div>
+
+        <div class="fields">
+          <div class="field">
+            <label for="date">تاریخ پیشنهادی</label>
+            <input type="date" id="date" name="date">
+          </div>
+
+          <div class="field">
+            <label for="time">ساعت شروع</label>
+            <input type="time" id="time" name="time">
+          </div>
+
+          <div class="field full">
+            <label for="location">شهر و محل برگزاری</label>
+            <input id="location" name="location"
+              placeholder="مثلاً بجنورد، باغ تالار ...">
+          </div>
+
+          <div class="field">
+            <label for="venue">نوع مراسم</label>
+            <select id="venue" name="venue">
+              <option value="">انتخاب کن</option>
+              <option>باغ تالار</option>
+              <option>تالار عروسی</option>
+              <option>باغ خصوصی</option>
+              <option>مراسم خانوادگی</option>
+              <option>مراسم در فضای باز</option>
+              <option>هنوز تصمیم نگرفتم</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="guests">تعداد مهمان‌ها</label>
+            <input type="number" id="guests" name="guests"
+              min="1" max="10000" placeholder="مثلاً 150">
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-title">
+          <span>02</span>
+          <h2>استایل عروس و داماد</h2>
+        </div>
+
+        <div class="fields">
+          <div class="field">
+            <label for="dress">لباس عروس</label>
+            <select id="dress" name="dress">
+              <option value="">انتخاب کن</option>
+              <option>لباس پرنسسی و دنباله‌دار</option>
+              <option>لباس ساده و مینیمال</option>
+              <option>لباس کلاسیک و سلطنتی</option>
+              <option>لباس مدرن و شیک</option>
+              <option>هنوز انتخاب نکردم</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="groom">استایل داماد</label>
+            <select id="groom" name="groom">
+              <option value="">انتخاب کن</option>
+              <option>کت‌وشلوار مشکی کلاسیک</option>
+              <option>کت‌وشلوار سفید</option>
+              <option>کت‌وشلوار کرم</option>
+              <option>کت‌وشلوار سرمه‌ای</option>
+              <option>هنوز انتخاب نکردم</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label>رنگ اصلی مراسم</label>
+            <div class="colors" id="colors">
+              <button type="button" class="color-option"
+                data-color="سفید و طلایی"
+                style="background:linear-gradient(135deg,#fff 50%,#c4a15e 50%)"
+                aria-label="سفید و طلایی"></button>
+
+              <button type="button" class="color-option"
+                data-color="مشکی و طلایی"
+                style="background:linear-gradient(135deg,#222 50%,#c4a15e 50%)"
+                aria-label="مشکی و طلایی"></button>
+
+              <button type="button" class="color-option"
+                data-color="صورتی ملایم"
+                style="background:#e9b9c5"
+                aria-label="صورتی ملایم"></button>
+
+              <button type="button" class="color-option"
+                data-color="آبی نفتی"
+                style="background:#164e57"
+                aria-label="آبی نفتی"></button>
+
+              <button type="button" class="color-option"
+                data-color="سبز زیتونی و کرم"
+                style="background:linear-gradient(135deg,#78805a 50%,#f0e5cf 50%)"
+                aria-label="سبز زیتونی و کرم"></button>
+
+              <button type="button" class="color-option"
+                data-color="یاسی"
+                style="background:#c9b7e8"
+                aria-label="یاسی"></button>
+            </div>
+            <input type="hidden" name="color" id="color" value="">
+            <p id="colorHint">برای انتخاب رنگ، روی یکی از دایره‌ها بزن.</p>
+          </div>
+
+          <div class="field">
+            <label for="flowers">دسته‌گل عروس</label>
+            <select id="flowers" name="flowers">
+              <option value="">انتخاب کن</option>
+              <option>رز سفید</option>
+              <option>رز قرمز</option>
+              <option>رز صورتی</option>
+              <option>ارکیده و گل‌های خاص</option>
+              <option>گل‌های طبیعی رنگارنگ</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="makeup">آرایش عروس</label>
+            <select id="makeup" name="makeup">
+              <option value="">انتخاب کن</option>
+              <option>لایت و طبیعی</option>
+              <option>کلاسیک و شیک</option>
+              <option>اسموکی و مجلسی</option>
+              <option>درخشان و ملایم</option>
+              <option>بعداً تصمیم می‌گیرم</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-title">
+          <span>03</span>
+          <h2>موسیقی و جزئیات رؤیایی</h2>
+        </div>
+
+        <div class="fields">
+          <div class="field full">
+            <label for="entrySong">آهنگ ورود عروس و داماد</label>
+            <input id="entrySong" name="entrySong"
+              placeholder="نام آهنگ و خواننده">
+          </div>
+
+          <div class="field full">
+            <label for="danceSong">آهنگ رقص دونفره</label>
+            <input id="danceSong" name="danceSong"
+              placeholder="آهنگی که دوست داری با هم برقصیم">
+          </div>
+
+          <div class="field">
+            <label for="cake">مدل کیک</label>
+            <select id="cake" name="cake">
+              <option value="">انتخاب کن</option>
+              <option>کیک سفید و طلایی</option>
+              <option>کیک گل‌دار کلاسیک</option>
+              <option>کیک چندطبقه لوکس</option>
+              <option>کیک مینیمال</option>
+              <option>کیک با طراحی اختصاصی</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="decor">دکور مراسم</label>
+            <select id="decor" name="decor">
+              <option value="">انتخاب کن</option>
+              <option>شمع و گل طبیعی</option>
+              <option>لوکس و طلایی</option>
+              <option>مینیمال و سفید</option>
+              <option>باغی و رمانتیک</option>
+              <option>کلاسیک و سلطنتی</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="extra">هر چیزی که دوست داری...</label>
+            <textarea id="extra" name="extra"
+              placeholder="مثلاً عکاسی خاص، آتش‌بازی، ماشین عروس، آهنگ موردعلاقه یا هر ایده‌ای که توی ذهنته..."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-card">
+        <div class="section-title">
+          <span>04</span>
+          <h2>پیام اختصاصی آیدا</h2>
+        </div>
+
+        <div class="field">
+          <label for="message">یه جمله برای حمید بنویس</label>
+          <textarea id="message" name="message"
+            placeholder="اگه بخوای یه جمله از ته دلت برای حمید بنویسی، چی می‌گی؟"></textarea>
+        </div>
+      </section>
+
+      <button class="btn submit" type="submit">
+        ساخت یادگاری عروسی ما ♡
+      </button>
+
+    </form>
+
+    <section id="result" aria-live="polite">
+      <div style="font-size:30px;margin-bottom:14px">✧ ♡ ✧</div>
+      <h2>یادگاری‌مون آماده شد!</h2>
+      <p id="resultText">
+        انتخاب‌های تو در یک گزارش اختصاصی آماده شده‌اند.
+      </p>
+
+      <div class="result-actions">
+        <button type="button" class="btn yes" onclick="downloadReport()">
+          دانلود گزارش عروسی
+        </button>
+
+        <button type="button" class="secondary" onclick="downloadJSON()">
+          دانلود فایل اطلاعات JSON
+        </button>
+
+        <button type="button" class="secondary" onclick="copyReport()">
+          کپی متن گزارش
+        </button>
+      </div>
+
+      <p style="font-size:11px;margin-top:20px">
+        این فایل، یادگاری انتخاب‌های توست؛ نه سند رسمی ازدواج.
+      </p>
+    </section>
+
+    <footer>
+      MADE WITH LOVE · HAMID & AIDA
+    </footer>
+  </div>
+</main>
+
+<script>
+const questionPage = document.getElementById('questionPage');
+const celebration = document.getElementById('celebration');
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const hint = document.getElementById('hint');
+const transitionLayer = document.getElementById('transition');
+
+let noClicks = 0;
+let selectedColor = '';
+let reportData = null;
+
+const noMessages = [
+  'مطمئنی؟ 🥹',
+  'یه بار دیگه فکر کن!',
+  'هنوزم نه؟ 😅',
+  'حمید منتظر جوابته!',
+  'این دکمه داره بزرگ می‌شه!',
+  'خب دیگه، صفحه جا کم آورد!'
+];
+
+function sayNo() {
+  noClicks++;
+
+  const scale = Math.min(1 + noClicks * 0.48, 9);
+
+  noBtn.style.transform = `scale(${scale})`;
+  noBtn.style.zIndex = '8';
+
+  // اجازه نمی‌ده دکمه آره پشت نه پنهان شود.
+  yesBtn.style.zIndex = '12';
+
+  hint.textContent =
+    noMessages[Math.min(noClicks - 1, noMessages.length - 1)];
+
+  if (noClicks >= 4) {
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = '50%';
+    noBtn.style.top = '50%';
+    noBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    noBtn.style.transformOrigin = 'center';
+  }
+}
+
+function makeConfetti() {
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches;
+
+  if (reducedMotion) return;
+
+  const colors = ['#c4a15e', '#f1dfb9', '#fff', '#9b7842', '#e7cbd1'];
+
+  for (let i = 0; i < 100; i++) {
+    const piece = document.createElement('i');
+    piece.className = 'confetti';
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.background = colors[
+      Math.floor(Math.random() * colors.length)
+    ];
+    piece.style.animationDuration = (2 + Math.random() * 3) + 's';
+    piece.style.animationDelay = (Math.random() * .8) + 's';
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 6000);
+  }
+}
+
+function sayYes() {
+  transitionLayer.innerHTML = '<div class="burst"></div>';
+
+  setTimeout(() => {
+    questionPage.style.display = 'none';
+    celebration.style.display = 'block';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    makeConfetti();
+
+    transitionLayer.innerHTML = '';
+
+    // انیمیشن ورود صفحه لوکس
+    celebration.style.animation = 'none';
+    void celebration.offsetWidth;
+    celebration.style.animation = 'reveal .9s ease both';
+  }, 650);
+}
+
+document.querySelectorAll('.color-option').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.color-option').forEach(item => {
+      item.classList.remove('selected');
+    });
+
+    button.classList.add('selected');
+    selectedColor = button.dataset.color;
+    document.getElementById('color').value = selectedColor;
+    document.getElementById('colorHint').textContent =
+      'رنگ انتخابی: ' + selectedColor;
+  });
+});
+
+function getFormData() {
+  const form = document.getElementById('weddingForm');
+  const fd = new FormData(form);
+  const data = {};
+
+  fd.forEach((value, key) => {
+    data[key] = String(value).trim();
+  });
+
+  data.color = selectedColor;
+  data.bride = 'آیدا';
+  data.groom = 'حمید';
+  data.title = 'یادگاری برنامه‌ریزی مراسم آیدا و حمید';
+  data.createdAt = new Date().toLocaleString('fa-IR');
+
+  return data;
+}
+
+function labelFor(key) {
+  const labels = {
+    bride: 'عروس',
+    groom: 'داماد',
+    date: 'تاریخ پیشنهادی',
+    time: 'ساعت مراسم',
+    location: 'مکان',
+    venue: 'نوع مراسم',
+    guests: 'تعداد مهمان‌ها',
+    dress: 'لباس عروس',
+    groom: 'داماد',
+    color: 'رنگ مراسم',
+    flowers: 'دسته‌گل',
+    makeup: 'آرایش عروس',
+    entrySong: 'آهنگ ورود',
+    danceSong: 'آهنگ رقص دونفره',
+    cake: 'کیک',
+    decor: 'دکور',
+    extra: 'ایده‌های دیگر',
+    message: 'پیام آیدا',
+    createdAt: 'زمان تهیه گزارش'
+  };
+
+  return labels[key] || key;
+}
+
+function buildReport(data) {
+  const lines = [
+    '♡ یادگاری برنامه‌ریزی مراسم آیدا و حمید ♡',
+    '==========================================',
+    '',
+    'این فایل، ثبت انتخاب‌های پیشنهادی برای یک مراسم است.',
+    'به معنی ثبت قانونی ازدواج یا رزرو قطعی نیست.',
+    ''
+  ];
+
+  const order = [
+    'bride', 'groom', 'date', 'time', 'location', 'venue',
+    'guests', 'dress', 'groom', 'color', 'flowers', 'makeup',
+    'entrySong', 'danceSong', 'cake', 'decor', 'extra',
+    'message', 'createdAt'
+  ];
+
+  const used = new Set();
+
+  order.forEach(key => {
+    if (used.has(key)) return;
+    used.add(key);
+
+    const value = data[key];
+    if (value !== undefined && value !== '') {
+      lines.push(labelFor(key) + ': ' + value);
+    }
+  });
+
+  lines.push('', 'با آرزوی روزهایی پر از عشق و شادی ♡');
+
+  return lines.join('\n');
+}
+
+document.getElementById('weddingForm').addEventListener(
+  'submit',
+  function(event) {
+    event.preventDefault();
+
+    reportData = getFormData();
+
+    document.getElementById('resultText').textContent =
+      'گزارش اختصاصی آیدا و حمید آماده است. می‌توانی آن را دانلود کنی و برای حمید بفرستی.';
+
+    const result = document.getElementById('result');
+    result.style.display = 'block';
+
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+);
+
+function downloadFile(content, filename, type) {
+  const blob = new Blob(['\uFEFF', content], { type });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+
+function downloadReport() {
+  if (!reportData) return;
+
+  downloadFile(
+    buildReport(reportData),
+    'Aida-Hamid-Wedding-Report.txt',
+    'text/plain;charset=utf-8'
+  );
+}
+
+function downloadJSON() {
+  if (!reportData) return;
+
+  downloadFile(
+    JSON.stringify(reportData, null, 2),
+    'Aida-Hamid-Wedding-Data.json',
+    'application/json;charset=utf-8'
+  );
+}
+
+async function copyReport() {
+  if (!reportData) return;
+
+  const text = buildReport(reportData);
+
+  try {
+    await navigator.clipboard.writeText(text);
+    alert('گزارش کپی شد! حالا می‌تونی برای حمید بفرستی. ♡');
+  } catch (error) {
+    // پشتیبان برای مرورگرهایی که Clipboard را نمی‌پذیرند
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+
+    try {
+      document.execCommand('copy');
+      alert('گزارش کپی شد! ♡');
+    } catch (_) {
+      alert('کپی خودکار ممکن نیست. از دانلود گزارش استفاده کن.');
+    }
+
+    area.remove();
+  }
+}
+</script>
+
+</body>
+</html>
